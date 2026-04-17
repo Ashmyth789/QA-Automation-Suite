@@ -1,4 +1,3 @@
-// pages/FormPage.js
 const BasePage = require('./BasePage');
 
 class FormPage extends BasePage {
