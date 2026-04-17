@@ -1,10 +1,3 @@
-// tests/api/api.test.js
-/**
- * API Tests using Playwright's built-in request context.
- * Target: JSONPlaceholder (https://jsonplaceholder.typicode.com) — a free public REST API.
- * Replace BASE_URL with your actual API endpoint.
- */
-
 const { test, expect } = require('@playwright/test');
 
 const BASE_URL = process.env.API_BASE_URL || 'https://jsonplaceholder.typicode.com';
