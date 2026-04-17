@@ -1,4 +1,3 @@
-// tests/e2e/forms.test.js
 const { test, expect } = require('@playwright/test');
 const FormPage = require('../../pages/FormPage');
 const { validFormData, edgeCaseFormData } = require('../../fixtures/formData');
@@ -28,7 +27,6 @@ test.describe('Form Validation & Submission', () => {
       email:     'jane@test.com',
     });
     await formPage.submitForm();
-    // Should either succeed or show only non-required field warnings
     const errors = await formPage.getFieldErrors();
     const requiredErrors = errors.filter(e => /required|mandatory/i.test(e));
     expect(requiredErrors.length).toBe(0);
