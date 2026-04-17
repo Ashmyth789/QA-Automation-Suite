@@ -1,4 +1,4 @@
-# 🧪 QA Automation Suite
+# QA Automation Suite
 
 ## 📋 Project Overview
 
@@ -13,7 +13,7 @@ This suite covers:
 
 ---
 
-## 🧩 Test Coverage
+## Test Coverage
 
 ### Authentication — `tests/e2e/auth.test.js`
 
@@ -74,7 +74,7 @@ This suite covers:
 
 ---
 
-## 🐛 Bug Tracker
+##Bug Tracker
 
 Located at `reports/bug-tracker.csv` — 15 documented bugs in Jira-style format:
 
@@ -87,7 +87,7 @@ Located at `reports/bug-tracker.csv` — 15 documented bugs in Jira-style format
 
 ---
 
-## ⚙️ Configuration
+##Configuration
 
 Copy `.env.example` to `.env` and set:
 
@@ -102,7 +102,7 @@ Browser projects, timeouts, retries, and reporters are all configurable in `play
 
 ---
 
-## 🔁 CI/CD
+##CI/CD
 
 GitHub Actions runs on every push to `main`/`develop` and every weekday at 06:00 UTC:
 
@@ -113,7 +113,7 @@ GitHub Actions runs on every push to `main`/`develop` and every weekday at 06:00
 
 ---
 
-## 🛠️ Tech Stack
+##Tech Stack
 
 | Tool | Purpose |
 |------|---------|
