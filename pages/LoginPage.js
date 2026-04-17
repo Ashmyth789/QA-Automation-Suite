@@ -1,4 +1,3 @@
-// pages/LoginPage.js
 const BasePage = require('./BasePage');
 
 class LoginPage extends BasePage {
