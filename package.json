@@ -1,0 +1,30 @@
+{
+  "name": "qa-automation-suite",
+  "version": "1.0.0",
+  "description": "End-to-end QA Automation Suite using Playwright for web testing and Postman/Newman for API testing",
+  "scripts": {
+    "test": "playwright test",
+    "test:e2e": "playwright test tests/e2e/",
+    "test:api": "newman run collections/api-test-collection.json -e collections/environments/dev.json --reporters cli,htmlextra --reporter-htmlextra-export reports/api-report.html",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "test:all": "npm run test:e2e && npm run test:api",
+    "lint": "eslint tests/ --ext .js,.ts",
+    "generate:report": "node scripts/generate-report.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "newman": "^6.1.2",
+    "newman-reporter-htmlextra": "^1.23.1",
+    "eslint": "^8.57.0",
+    "dotenv": "^16.4.5",
+    "faker": "^6.6.6",
+    "@faker-js/faker": "^8.4.1",
+    "allure-playwright": "^3.0.0",
+    "allure-commandline": "^2.29.0"
+  },
+  "keywords": ["playwright", "selenium", "postman", "qa", "automation", "testing"],
+  "author": "QA Engineer",
+  "license": "MIT"
+}
