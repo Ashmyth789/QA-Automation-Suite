@@ -1,0 +1,10 @@
+{
+  "id": "dev-environment",
+  "name": "Development",
+  "values": [
+    { "key": "baseUrl",   "value": "https://jsonplaceholder.typicode.com", "enabled": true },
+    { "key": "authToken", "value": "",                                      "enabled": true },
+    { "key": "userId",    "value": "1",                                     "enabled": true },
+    { "key": "postId",    "value": "1",                                     "enabled": true }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "info": {
+    "name": "QA Automation Suite — API Tests",
+    "description": "Comprehensive API test collection covering CRUD operations, validation, error handling, and edge cases.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    { "key": "baseUrl",   "value": "https://jsonplaceholder.typicode.com" },
+    { "key": "postId",    "value": "1" },
+    { "key": "userId",    "value": "1" },
+    { "key": "authToken", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "TC-API-HC-001 | GET /posts → 200 OK",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+            "pm.test('Response is JSON', () => pm.response.to.be.json);",
+            "pm.test('Response time < 2000ms', () => pm.expect(pm.response.responseTime).to.be.below(2000));"
+          ]}}],
+          "request": { "method": "GET", "url": "{{baseUrl}}/posts" }
+        }
+      ]
+    },
+    {
+      "name": "Posts CRUD",
+      "item": [
+        {
+          "name": "TC-API-001 | GET single post — valid schema",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('Has id',     () => pm.expect(body).to.have.property('id'));",
+            "pm.test('Has title',  () => pm.expect(body).to.have.property('title'));",
+            "pm.test('Has body',   () => pm.expect(body).to.have.property('body'));",
+            "pm.test('Has userId', () => pm.expect(body).to.have.property('userId'));",
+            "pm.test('id is number', () => pm.expect(typeof body.id).to.eq('number'));"
+          ]}}],
+          "request": { "method": "GET", "url": "{{baseUrl}}/posts/{{postId}}" }
+        },
+        {
+          "name": "TC-API-002 | POST /posts — create resource",
+          "event": [
+            { "listen": "prerequest", "script": { "exec": [
+              "pm.variables.set('newTitle', 'Test Post ' + Date.now());"
+            ]}},
+            { "listen": "test", "script": { "exec": [
+              "pm.test('Status 201', () => pm.response.to.have.status(201));",
+              "const body = pm.response.json();",
+              "pm.test('Returns new id',   () => pm.expect(body.id).to.exist);",
+              "pm.test('Title matches',    () => pm.expect(body.title).to.eq(pm.variables.get('newTitle')));",
+              "pm.variables.set('createdPostId', body.id);"
+            ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url":  "{{baseUrl}}/posts",
+            "body": { "mode": "raw", "raw": "{\n  \"title\":  \"{{newTitle}}\",\n  \"body\":   \"Test body content\",\n  \"userId\": 1\n}" }
+          }
+        },
+        {
+          "name": "TC-API-003 | PUT /posts/:id — full update",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('Title updated', () => pm.expect(body.title).to.eq('Updated Title'));"
+          ]}}],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url":  "{{baseUrl}}/posts/{{postId}}",
+            "body": { "mode": "raw", "raw": "{\n  \"id\":     1,\n  \"title\":  \"Updated Title\",\n  \"body\":   \"Updated body content\",\n  \"userId\": 1\n}" }
+          }
+        },
+        {
+          "name": "TC-API-004 | PATCH /posts/:id — partial update",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200', () => pm.response.to.have.status(200));",
+            "const body = pm.response.json();",
+            "pm.test('Title patched', () => pm.expect(body.title).to.eq('Patched Title'));"
+          ]}}],
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url":  "{{baseUrl}}/posts/{{postId}}",
+            "body": { "mode": "raw", "raw": "{ \"title\": \"Patched Title\" }" }
+          }
+        },
+        {
+          "name": "TC-API-005 | DELETE /posts/:id — success",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 200 or 204', () => pm.expect([200, 204]).to.include(pm.response.code));"
+          ]}}],
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/posts/{{postId}}" }
+        }
+      ]
+    },
+    {
+      "name": "Error Handling",
+      "item": [
+        {
+          "name": "TC-API-ERR-001 | GET non-existent post → 404",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 404', () => pm.response.to.have.status(404));"
+          ]}}],
+          "request": { "method": "GET", "url": "{{baseUrl}}/posts/99999999" }
+        },
+        {
+          "name": "TC-API-ERR-002 | GET invalid route → 404",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('Status 404', () => pm.response.to.have.status(404));"
+          ]}}],
+          "request": { "method": "GET", "url": "{{baseUrl}}/thisdoesnotexist" }
+        }
+      ]
+    },
+    {
+      "name": "Edge Cases",
+      "item": [
+        {
+          "name": "TC-API-EDGE-001 | POST with empty body",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('No 5xx error', () => pm.expect(pm.response.code).to.be.below(500));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url":  "{{baseUrl}}/posts",
+            "body": { "mode": "raw", "raw": "{}" }
+          }
+        },
+        {
+          "name": "TC-API-EDGE-002 | POST with large payload",
+          "event": [{ "listen": "test", "script": { "exec": [
+            "pm.test('No 5xx error', () => pm.expect(pm.response.code).to.be.below(500));"
+          ]}}],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url":  "{{baseUrl}}/posts",
+            "body": { "mode": "raw", "raw": "{ \"title\": \"{{$randomLoremParagraph}}\", \"body\": \"{{$randomLoremText}}\", \"userId\": 1 }" }
+          }
+        }
+      ]
+    }
+  ]
+}
