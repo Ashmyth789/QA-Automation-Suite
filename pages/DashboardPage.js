@@ -1,4 +1,3 @@
-// pages/DashboardPage.js
 const BasePage = require('./BasePage');
 
 class DashboardPage extends BasePage {
