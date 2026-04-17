@@ -1,5 +1,3 @@
-// fixtures/formData.js
-
 const validFormData = {
   firstName: 'Jane',
   lastName:  'Doe',
