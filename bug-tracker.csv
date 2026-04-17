@@ -1,0 +1,47 @@
+Bug ID,Title,Severity,Priority,Status,Module,Test Case ID,Steps to Reproduce,Expected Result,Actual Result,Environment,Browser,Screenshot,Assigned To,Reported Date,Fixed Date,Regression Check
+BUG-001,Login form accepts whitespace-only credentials,High,P1,Open,Authentication,TC-AUTH-013,"1. Go to /login
+2. Enter spaces only in username field
+3. Enter spaces only in password field
+4. Click Login","Form should reject empty/whitespace input with validation error","Form submits and shows a generic server error instead of client-side validation",Staging,Chrome 124,screenshots/bug-001.png,Unassigned,2024-05-01,,No
+BUG-002,Email field accepts invalid format 'user@' without error,High,P1,Open,Forms,TC-FORM-006,"1. Navigate to contact form
+2. Enter 'user@' in the email field
+3. Fill other required fields
+4. Submit form","Email validation error shown immediately","Form submits successfully with invalid email — no error shown",Production,Firefox 125,screenshots/bug-002.png,Unassigned,2024-05-01,,No
+BUG-003,Todo counter not updated after deleting completed item,Medium,P2,Open,User Workflows,TC-WF-012,"1. Create 3 todos
+2. Mark 2 as complete
+3. Delete 1 completed todo","Counter should decrement to reflect remaining active items","Counter remains unchanged at original count",Staging,Chrome 124,screenshots/bug-003.png,Unassigned,2024-05-01,,No
+BUG-004,API POST /posts returns 500 for empty body payload,Critical,P0,Open,API,TC-API-008,"1. Send POST request to /posts
+2. Body: {}
+3. Content-Type: application/json","Server should return 400 Bad Request with error message","Server returns 500 Internal Server Error — unhandled exception",Development,N/A,screenshots/bug-004.png,Unassigned,2024-05-01,,No
+BUG-005,Mobile viewport cuts off login button on iPhone 13,Medium,P2,Open,Authentication,TC-WF-013,"1. Open login page on mobile (375px width)
+2. Scroll down to form
+3. Observe Submit button","Submit button fully visible and tappable","Submit button is partially hidden behind the mobile keyboard and cannot be tapped without dismissing keyboard",Staging,Safari Mobile 17,screenshots/bug-005.png,Unassigned,2024-05-01,,No
+BUG-006,XSS payload reflected in error message without encoding,Critical,P0,Open,Authentication,TC-AUTH-010,"1. Enter <img src=x onerror=alert(document.cookie)> in username
+2. Enter any password
+3. Submit form","Input sanitised — error message shows plain text only","Script executes — alert box fires in browser indicating stored XSS vulnerability",Production,Chrome 124,screenshots/bug-006.png,Unassigned,2024-05-01,,No
+BUG-007,Form reset button only clears text fields — dropdowns remain selected,Low,P3,Open,Forms,TC-FORM-013,"1. Fill entire form including dropdown
+2. Click Reset button","All fields including dropdowns reset to default/empty","Text inputs cleared but <select> dropdown retains previously selected value",Development,Firefox 125,screenshots/bug-007.png,Unassigned,2024-05-01,,No
+BUG-008,Logout does not invalidate server-side session,High,P1,Open,Authentication,TC-AUTH-014,"1. Login with valid credentials
+2. Copy session token from cookies
+3. Click Logout
+4. Re-use copied token in direct API request","Session token invalidated — API returns 401","API responds with 200 and returns user data — session token still valid after logout",Production,Chrome 124,screenshots/bug-008.png,Unassigned,2024-05-01,,No
+BUG-009,Page load time exceeds 3 seconds on slow 3G throttling,Medium,P2,Open,Navigation,TC-NAV-002,"1. Open DevTools > Network
+2. Throttle to Slow 3G
+3. Reload the page
+4. Measure load time","Page loads within 3 seconds on Slow 3G","Page takes 6.8 seconds to reach interactive state — no loading skeleton or indicator",Production,Chrome 124,screenshots/bug-009.png,Unassigned,2024-05-01,,No
+BUG-010,Console error thrown on navigation to /profile when not logged in,Low,P3,Open,Navigation,TC-NAV-003,"1. Clear all cookies/session
+2. Navigate directly to /profile
+3. Open browser console","Redirect to /login with no console errors","Uncaught TypeError thrown before redirect fires: 'Cannot read properties of undefined (reading userId)'",Staging,Chrome 124,screenshots/bug-010.png,Unassigned,2024-05-01,,No
+BUG-011,Double-click submit creates duplicate form entries,High,P1,Open,Forms,TC-FORM-014,"1. Fill out form completely
+2. Click Submit
+3. Immediately double-click Submit button","Only one submission created","Two identical entries appear in the database — no debounce or submit-once protection",Production,Chrome 124,screenshots/bug-011.png,Unassigned,2024-05-01,,No
+BUG-012,API GET /users returns user passwords in plaintext,Critical,P0,Open,API,TC-API-014,"1. Send GET /users
+2. Inspect response body","Password field should not be present in response","password field with plaintext value returned for every user object",Production,N/A,screenshots/bug-012.png,Unassigned,2024-05-01,,No
+BUG-013,Form phone field accepts alphabetic characters,Low,P3,Open,Forms,TC-WF-012,"1. Navigate to contact form
+2. Type 'abcdefg' in phone field
+3. Observe validation","Phone field should only accept digits, +, -, (, )","Alphabetic input accepted without any validation message — data saved as-is",Staging,Firefox 125,screenshots/bug-013.png,Unassigned,2024-05-01,,No
+BUG-014,Password field value visible in page source after login failure,High,P1,Open,Authentication,TC-AUTH-005,"1. Enter credentials on login page
+2. Submit with wrong password
+3. View page source","Password value NOT present in HTML source","Password input value attribute serialised in page source: <input value='wrongpass'>",Production,Chrome 124,screenshots/bug-014.png,Unassigned,2024-05-01,,No
+BUG-015,Broken avatar image on dashboard for users with special chars in name,Low,P3,Open,Dashboard,TC-NAV-004,"1. Login as user with name containing '&' or '%'
+2. Navigate to dashboard","Avatar image loads correctly","Avatar <img> src URL contains unencoded characters — 404 returned for image",Staging,Safari 17,screenshots/bug-015.png,Unassigned,2024-05-01,,No
