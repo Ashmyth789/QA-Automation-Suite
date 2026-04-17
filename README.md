@@ -1,4 +1,4 @@
-# QA Automation Suite
+  # QA Automation Suite
 
 ## 📋 Project Overview
 
@@ -120,5 +120,5 @@ GitHub Actions runs on every push to `main`/`develop` and every weekday at 06:00
 | [Playwright](https://playwright.dev) | E2E browser automation |
 | [Newman](https://github.com/postmanlabs/newman) | Postman CLI runner |
 | [Faker.js](https://fakerjs.dev) | Randomised test data |
-| [GitHub Actions](https://github.com/features/actions | CI/CD pipeline |
+| [GitHub Actions](https://github.com/features/actions) | CI/CD pipeline |
 | ESLint | Code quality |
