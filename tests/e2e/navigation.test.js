@@ -1,4 +1,3 @@
-// tests/e2e/navigation.test.js
 const { test, expect } = require('@playwright/test');
 
 test.describe('Navigation & User Workflows', () => {
