@@ -1,10 +1,3 @@
-// scripts/generate-report.js
-/**
- * Reads Playwright's test-results.json and prints a
- * human-readable QA summary to stdout (and optionally writes
- * reports/summary.md for CI artefacts).
- */
-
 const fs   = require('fs');
 const path = require('path');
 
