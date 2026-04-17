@@ -1,4 +1,3 @@
-// tests/e2e/auth.test.js
 const { test, expect } = require('@playwright/test');
 const LoginPage = require('../../pages/LoginPage');
 const DashboardPage = require('../../pages/DashboardPage');
