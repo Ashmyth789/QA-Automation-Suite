@@ -1,14 +1,5 @@
 # 🧪 QA Automation Suite
 
-> End-to-end testing framework using **Playwright** for UI/workflow automation and **Postman/Newman** for API testing — built to simulate real-world QA engineering workflows.
-
-![CI](https://github.com/your-username/qa-automation-suite/actions/workflows/qa-suite.yml/badge.svg)
-![Playwright](https://img.shields.io/badge/Playwright-1.44+-green?logo=playwright)
-![Postman](https://img.shields.io/badge/Postman-Newman-orange?logo=postman)
-![License](https://img.shields.io/badge/license-MIT-blue)
-
----
-
 ## 📋 Project Overview
 
 This suite covers:
@@ -19,97 +10,6 @@ This suite covers:
 - **Cross-browser testing** — Chromium, Firefox, WebKit, Mobile Chrome, Mobile Safari
 - **Bug tracking** — 15+ documented bugs in Jira-style CSV with severity, steps, and reproduction info
 - **CI/CD integration** — GitHub Actions pipeline with parallel browser matrix
-
----
-
-## 🗂️ Project Structure
-
-```
-qa-automation-suite/
-├── tests/
-│   ├── e2e/
-│   │   ├── auth.test.js          # 15 auth test cases (login, logout, session, XSS/SQLi)
-│   │   ├── forms.test.js         # 15 form validation test cases
-│   │   └── navigation.test.js    # 14 workflow & navigation test cases
-│   └── api/
-│       └── api.test.js           # 20 API test cases (CRUD, schema, error handling)
-├── pages/                        # Page Object Models
-│   ├── BasePage.js
-│   ├── LoginPage.js
-│   ├── DashboardPage.js
-│   └── FormPage.js
-├── fixtures/
-│   ├── users.js                  # Test user data + edge-case inputs
-│   └── formData.js               # Form data fixtures
-├── utils/
-│   └── testHelpers.js            # Shared helpers (faker, retry, bug formatter)
-├── collections/
-│   ├── api-test-collection.json  # Postman collection
-│   └── environments/
-│       └── dev.json              # Newman environment variables
-├── reports/
-│   └── bug-tracker.csv           # 15 documented bugs (Jira-style)
-├── docs/
-│   └── TEST-PLAN.md              # Full test plan with coverage matrix
-├── scripts/
-│   └── generate-report.js        # CLI summary report generator
-├── .github/
-│   └── workflows/
-│       └── qa-suite.yml          # GitHub Actions CI pipeline
-├── playwright.config.js
-├── .env.example
-└── package.json
-```
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js >= 18.x
-- npm >= 9.x
-
-### Installation
-
-```bash
-git clone https://github.com/your-username/qa-automation-suite.git
-cd qa-automation-suite
-
-npm install
-npx playwright install          # installs all browser binaries
-
-cp .env.example .env            # configure your environment
-```
-
-### Running Tests
-
-```bash
-# All E2E tests (headless, all browsers)
-npm run test:e2e
-
-# Single browser
-npx playwright test --project=chromium
-npx playwright test --project=firefox
-npx playwright test --project=webkit
-
-# Headed mode (watch the browser)
-npm run test:headed
-
-# Debug mode (step-through)
-npm run test:debug
-
-# API tests via Playwright request context
-npx playwright test tests/api/
-
-# API tests via Newman (Postman collection)
-npm run test:api
-
-# View interactive HTML report
-npm run test:report
-
-# Generate markdown summary
-npm run generate:report
-```
 
 ---
 
@@ -220,11 +120,4 @@ GitHub Actions runs on every push to `main`/`develop` and every weekday at 06:00
 | [Playwright](https://playwright.dev) | E2E browser automation |
 | [Newman](https://github.com/postmanlabs/newman) | Postman CLI runner |
 | [Faker.js](https://fakerjs.dev) | Randomised test data |
-| [GitHub Actions](https://github.com/features/actions) | CI/CD pipeline |
-| ESLint | Code quality |
-
----
-
-## 📄 License
-
-MIT © QA Engineer
+| [GitHub Actions](https://github.com/features/actions |
